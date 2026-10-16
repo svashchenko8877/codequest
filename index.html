@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CodeQuest — Learn Swift, JavaScript, Rust & C++ on your iPhone</title>
+<meta name="description" content="CodeQuest turns learning to code into a game. 600 bite-sized lessons across Swift, JavaScript, Rust and C++, with quests, streaks, XP and a real JavaScript playground — all on your iPhone.">
+<meta name="theme-color" content="#0A0A1C">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CodeQuest — Learn to code like it's a game">
+<meta property="og:description" content="600 bite-sized lessons in Swift, JavaScript, Rust and C++. Quests, streaks, XP, and a real JS playground. Built for iPhone.">
+<meta property="og:image" content="shots/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="shots/icon.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"CodeQuest","operatingSystem":"iOS","applicationCategory":"EducationalApplication","description":"A gamified iPhone app that teaches Swift, JavaScript, Rust and C++ through 600 interactive lessons."}
+</script>
+<style>
+:root{
+  --bg1:#0A0A1C; --bg2:#1A0F3D; --bg3:#0C2547;
+  --violet:#8B5CF6; --gem:#4DE1FF; --gold:#FFC83D; --good:#3DDC84; --bad:#FF5C6C; --flame:#FF8A3D;
+  --swift:#FF8A3D; --js:#F7D038; --rust:#E0524D; --cpp:#4C8DFF;
+  --card:rgba(255,255,255,.06); --stroke:rgba(255,255,255,.12); --t2:rgba(255,255,255,.64);
+  --r:system-ui,-apple-system,"SF Pro Rounded","Segoe UI Rounded","Nunito","Segoe UI",Roboto,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--r);color:#fff;background:var(--bg1);line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+.bgfx{position:fixed;inset:0;z-index:-1;background:linear-gradient(135deg,var(--bg1),var(--bg2) 55%,var(--bg3))}
+.bgfx i{position:absolute;border-radius:50%;filter:blur(110px);opacity:.5;animation:drift 14s ease-in-out infinite alternate}
+.bgfx i:nth-child(1){width:520px;height:520px;background:var(--violet);top:-120px;left:-80px}
+.bgfx i:nth-child(2){width:460px;height:460px;background:#1b6aff;opacity:.25;bottom:-100px;right:-80px;animation-delay:-5s}
+.bgfx i:nth-child(3){width:320px;height:320px;background:var(--gem);opacity:.16;top:40%;left:55%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(70px,50px) scale(1.12)}}
+
+/* nav */
+nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(18px);background:rgba(10,10,28,.55);border-bottom:1px solid var(--stroke)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:21px;letter-spacing:-.3px}
+.logo img{width:34px;height:34px;border-radius:9px}
+nav ul{display:flex;gap:26px;list-style:none;font-weight:700;font-size:15px;color:var(--t2)}
+nav ul a:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:800;border-radius:16px;padding:14px 24px;font-size:16px;transition:transform .15s, box-shadow .15s;cursor:pointer;border:0}
+.btn.primary{background:linear-gradient(180deg,#9b72ff,#7a46f2);color:#fff;box-shadow:0 5px 0 #4b25a8,0 18px 40px rgba(139,92,246,.45)}
+.btn.primary:hover{transform:translateY(-2px)}
+.btn.primary:active{transform:translateY(3px);box-shadow:0 2px 0 #4b25a8}
+.btn.ghost{background:var(--card);border:1px solid var(--stroke);color:#fff}
+.btn.ghost:hover{background:rgba(255,255,255,.1)}
+.btn.small{padding:10px 18px;font-size:14px;border-radius:12px}
+@media(max-width:760px){nav ul{display:none}}
+
+/* hero */
+.hero{padding:70px 0 40px}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.pill{display:inline-flex;gap:8px;align-items:center;background:rgba(255,200,61,.12);border:1px solid rgba(255,200,61,.35);color:var(--gold);padding:7px 14px;border-radius:999px;font-weight:800;font-size:13px;margin-bottom:22px}
+h1{font-size:clamp(40px,6.2vw,74px);line-height:1.02;font-weight:900;letter-spacing:-2px}
+h1 .grad{background:linear-gradient(90deg,var(--gem),var(--violet) 45%,var(--flame));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:clamp(17px,2vw,21px);color:var(--t2);margin:22px 0 32px;max-width:520px}
+.cta{display:flex;gap:14px;flex-wrap:wrap}
+.langs-row{display:flex;gap:10px;margin-top:34px;flex-wrap:wrap;align-items:center;color:var(--t2);font-weight:700;font-size:14px}
+.chip{padding:6px 13px;border-radius:999px;font-weight:900;font-size:13px;color:#111}
+.chip.swift{background:var(--swift)}.chip.js{background:var(--js)}.chip.rust{background:var(--rust);color:#fff}.chip.cpp{background:var(--cpp);color:#fff}
+@media(max-width:900px){.hero .wrap{grid-template-columns:1fr;text-align:center}.lead{margin-left:auto;margin-right:auto}.cta,.langs-row{justify-content:center}}
+
+/* phone */
+.phone{position:relative;width:min(300px,78vw);aspect-ratio:9/19.3;margin:0 auto;border-radius:46px;padding:9px;background:linear-gradient(150deg,#3a3a55,#14142a);box-shadow:0 40px 90px rgba(0,0,0,.55),0 0 0 2px #2c2c46,inset 0 0 0 2px #55557a;transform:rotate(-3deg);transition:transform .5s}
+.phone:hover{transform:rotate(0)}
+.phone .screen{width:100%;height:100%;border-radius:38px;overflow:hidden;background:#0A0A1C;position:relative}
+.phone .screen img{width:100%;height:100%;object-fit:cover;display:block}
+.phone::before{content:"";position:absolute;top:18px;left:50%;transform:translateX(-50%);width:84px;height:24px;background:#000;border-radius:20px;z-index:3}
+.float{position:absolute;z-index:4;background:rgba(20,20,45,.85);backdrop-filter:blur(10px);border:1px solid var(--stroke);border-radius:16px;padding:10px 14px;font-weight:800;font-size:14px;display:flex;gap:8px;align-items:center;animation:bob 4s ease-in-out infinite}
+.float.a{top:12%;left:-40px;animation-delay:0s}.float.b{top:46%;right:-46px;animation-delay:-1.3s}.float.c{bottom:10%;left:-30px;animation-delay:-2.6s}
+@keyframes bob{50%{transform:translateY(-10px)}}
+@media(max-width:900px){.float.a{left:-4px}.float.b{right:-4px}.float.c{left:0}}
+
+/* stats band */
+.band{padding:26px 0}
+.band .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.stat{background:var(--card);border:1px solid var(--stroke);border-radius:22px;padding:22px;text-align:center}
+.stat b{display:block;font-size:40px;font-weight:900;letter-spacing:-1px}
+.stat span{color:var(--t2);font-weight:700;font-size:14px}
+@media(max-width:700px){.band .wrap{grid-template-columns:1fr 1fr}}
+
+section{padding:84px 0}
+.eyebrow{color:var(--gem);font-weight:900;letter-spacing:2px;font-size:13px;text-transform:uppercase}
+h2{font-size:clamp(30px,4.4vw,52px);line-height:1.05;font-weight:900;letter-spacing:-1.4px;margin:10px 0 16px}
+.sub{color:var(--t2);font-size:18px;max-width:600px}
+.center{text-align:center}.center .sub{margin:0 auto}
+
+/* languages */
+.lgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:44px}
+.lcard{border-radius:26px;padding:26px;background:var(--card);border:1px solid var(--stroke);position:relative;overflow:hidden;transition:transform .25s}
+.lcard:hover{transform:translateY(-6px)}
+.lcard::after{content:"";position:absolute;inset:auto -40% -60% -40%;height:70%;background:radial-gradient(closest-side,var(--c),transparent);opacity:.28}
+.lcard .badge{width:56px;height:56px;border-radius:17px;background:var(--c);display:grid;place-items:center;font-weight:900;font-size:22px;color:#111;margin-bottom:18px;box-shadow:0 10px 26px color-mix(in srgb,var(--c) 55%,transparent)}
+.lcard h3{font-size:24px;font-weight:900}
+.lcard p{color:var(--t2);font-weight:600;margin:6px 0 16px;font-size:15px}
+.lcard pre{font-family:var(--mono);font-size:12.5px;background:rgba(0,0,0,.35);border:1px solid var(--stroke);padding:12px;border-radius:14px;line-height:1.55;position:relative;z-index:1;overflow:hidden}
+.k{color:#ff7ab6}.s{color:#8be28b}.n{color:#ffb86c}.t{color:#7dd3fc}.c{color:#6c7a96}.f{color:#c4a7ff}
+@media(max-width:980px){.lgrid{grid-template-columns:1fr 1fr}}@media(max-width:560px){.lgrid{grid-template-columns:1fr}}
+
+/* features */
+.fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
+.feat{background:var(--card);border:1px solid var(--stroke);border-radius:26px;padding:26px}
+.feat .ic{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:26px;margin-bottom:16px}
+.feat h3{font-size:21px;font-weight:900;margin-bottom:6px}
+.feat p{color:var(--t2);font-weight:500;font-size:15.5px}
+@media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr}}@media(max-width:560px){.fgrid{grid-template-columns:1fr}}
+
+/* showcase */
+.show{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.show.rev .txt{order:2}
+.show .phone{transform:rotate(2deg)}.show.rev .phone{transform:rotate(-2deg)}
+.show .phone:hover{transform:rotate(0)}
+.bul{list-style:none;margin-top:22px;display:grid;gap:12px}
+.bul li{display:flex;gap:12px;font-weight:700;color:rgba(255,255,255,.88)}
+.bul li::before{content:"✓";flex:none;width:24px;height:24px;border-radius:50%;background:var(--good);color:#06240f;display:grid;place-items:center;font-size:14px;font-weight:900;margin-top:1px}
+@media(max-width:860px){.show{grid-template-columns:1fr;text-align:center}.show.rev .txt{order:0}.bul{text-align:left}}
+
+/* live demo */
+.demo{max-width:560px;margin:46px auto 0;background:rgba(255,255,255,.06);border:1px solid var(--stroke);border-radius:30px;padding:26px;backdrop-filter:blur(12px);position:relative;overflow:hidden}
+.demo .bar{height:12px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden;margin-bottom:22px}
+.demo .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--js),#ffe27a);border-radius:99px;transition:width .5s}
+.demo h4{font-size:22px;font-weight:900;margin-bottom:14px}
+.demo pre{font-family:var(--mono);font-size:15px;background:rgba(0,0,0,.4);border:1px solid var(--stroke);border-radius:16px;padding:14px;margin-bottom:16px;line-height:1.6}
+.opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--card);border:1.5px solid var(--stroke);border-radius:16px;padding:14px;margin-bottom:10px;color:#fff;font:700 17px var(--r);cursor:pointer;transition:.15s}
+.opt:hover{background:rgba(255,255,255,.1)}
+.opt b{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.14);display:grid;place-items:center;font-size:14px;flex:none}
+.opt.sel{border-color:var(--js);background:rgba(247,208,56,.16)}.opt.sel b{background:var(--js);color:#111}
+.opt.ok{border-color:var(--good);background:rgba(61,220,132,.18)}.opt.no{border-color:var(--bad);background:rgba(255,92,108,.16)}
+.fb{margin:14px -26px -26px;padding:18px 26px 22px;display:none;gap:4px;flex-direction:column}
+.fb.show{display:flex}.fb.ok{background:rgba(61,220,132,.16)}.fb.no{background:rgba(255,92,108,.16)}
+.fb strong{font-size:20px;font-weight:900}.fb.ok strong{color:var(--good)}.fb.no strong{color:var(--bad)}
+.fb span{color:rgba(255,255,255,.86);font-weight:500}
+.demo .btn{width:100%;justify-content:center;margin-top:14px}
+.dots{display:flex;gap:6px;justify-content:center;margin-bottom:6px}
+
+/* how */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px;counter-reset:s}
+.step{background:var(--card);border:1px solid var(--stroke);border-radius:26px;padding:28px;position:relative}
+.step::before{counter-increment:s;content:counter(s);position:absolute;top:-18px;left:24px;width:38px;height:38px;border-radius:50%;background:var(--violet);display:grid;place-items:center;font-weight:900;box-shadow:0 8px 20px rgba(139,92,246,.5)}
+.step h3{font-size:21px;font-weight:900;margin:8px 0 6px}.step p{color:var(--t2);font-weight:500}
+@media(max-width:800px){.steps{grid-template-columns:1fr}}
+
+/* faq */
+.faq{max-width:760px;margin:44px auto 0;display:grid;gap:12px}
+details{background:var(--card);border:1px solid var(--stroke);border-radius:20px;padding:18px 22px}
+summary{cursor:pointer;font-weight:800;font-size:18px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::after{content:"+";color:var(--gem);font-size:24px;line-height:1}
+details[open] summary::after{content:"–"}
+details p{color:var(--t2);margin-top:12px;font-weight:500}
+
+/* final cta */
+.final{text-align:center;background:linear-gradient(135deg,rgba(139,92,246,.35),rgba(76,141,255,.25));border:1px solid var(--stroke);border-radius:40px;padding:64px 26px;position:relative;overflow:hidden}
+.final h2{margin-top:0}
+.mascot{width:96px;height:96px;margin:0 auto 18px;position:relative;animation:bob 3.4s ease-in-out infinite}
+.mascot .h{position:absolute;inset:14px 0 0 0;border-radius:32px;background:linear-gradient(180deg,#9d74f7,#7144de);box-shadow:0 12px 30px rgba(139,92,246,.6)}
+.mascot .f{position:absolute;inset:26px 12px 12px 12px;border-radius:22px;background:#10122B;display:flex;gap:14px;align-items:center;justify-content:center;flex-direction:column}
+.mascot .e{display:flex;gap:14px}.mascot .e i{width:10px;height:16px;border-radius:8px;background:var(--gem);box-shadow:0 0 8px var(--gem);animation:blink 4s infinite}
+.mascot .m{width:22px;height:10px;border-bottom:4px solid var(--gem);border-radius:0 0 20px 20px}
+.mascot::before{content:"";position:absolute;top:-4px;left:50%;width:12px;height:12px;margin-left:-6px;background:var(--gold);border-radius:50%;box-shadow:0 0 10px var(--gold)}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+footer{padding:40px 0 60px;color:var(--t2);font-weight:600;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
+footer a:hover{color:#fff}
+
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s,transform .7s}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="bgfx"><i></i><i></i><i></i></div>
+
+<nav><div class="wrap">
+  <a href="#top" class="logo"><img src="shots/icon.png" alt="">CodeQuest</a>
+  <ul><li><a href="#languages">Languages</a></li><li><a href="#features">Features</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#try">Try it</a></li><li><a href="#faq">FAQ</a></li></ul>
+  <a class="btn primary small" href="#download">Get the app</a>
+</div></nav>
+
+<header class="hero" id="top"><div class="wrap">
+  <div>
+    <div class="pill">⚡ 600 interactive lessons · 4 languages</div>
+    <h1>Learn to code like it's a <span class="grad">game.</span></h1>
+    <p class="lead">Swift, JavaScript, Rust and C++ in bite-sized quests on your iPhone. Earn XP, keep your streak alive, unlock badges — and run real JavaScript right in your pocket.</p>
+    <div class="cta">
+      <a class="btn primary" href="#download"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.8-3.5.8-.7 0-1.9-.8-3.1-.8-1.6 0-3.1.9-3.9 2.4-1.7 2.9-.4 7.2 1.2 9.6.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8s1.9.8 3.1.8c1.3 0 2.1-1.2 2.9-2.3.9-1.3 1.3-2.6 1.3-2.7 0 0-2.7-1-2.7-4.1zM14 5.5c.6-.8 1.1-1.8.9-2.9-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.8-1 2.8 1 .1 2.1-.5 2.8-1.3z"/></svg>Download on the App Store</a>
+      <a class="btn ghost" href="#try">Try a lesson ↓</a>
+    </div>
+    <div class="langs-row"><span>Learn</span><span class="chip swift">Swift</span><span class="chip js">JavaScript</span><span class="chip rust">Rust</span><span class="chip cpp">C++</span></div>
+  </div>
+  <div style="position:relative">
+    <div class="phone"><div class="screen"><img src="shots/learn.png" alt="CodeQuest learning path"></div></div>
+    <div class="float a">🔥 12 day streak</div>
+    <div class="float b">⭐ +25 XP</div>
+    <div class="float c">💎 Quest complete!</div>
+  </div>
+</div></header>
+
+<div class="band"><div class="wrap reveal">
+  <div class="stat"><b>600</b><span>bite-sized lessons</span></div>
+  <div class="stat"><b>4</b><span>programming languages</span></div>
+  <div class="stat"><b>3,000</b><span>hands-on exercises</span></div>
+  <div class="stat"><b>0</b><span>laptops required</span></div>
+</div></div>
+
+<section id="languages"><div class="wrap">
+  <div class="center reveal"><div class="eyebrow">Four courses, one app</div>
+  <h2>Pick a language. Start a quest.</h2>
+  <p class="sub">Each course is 150 lessons from “hello world” to the deep end — with a mix of quizzes, fill-in-the-gap, code puzzles and challenges.</p></div>
+  <div class="lgrid">
+    <div class="lcard reveal" style="--c:var(--swift)"><div class="badge" style="color:#fff">S</div><h3>Swift</h3><p>Build apps for iPhone.</p>
+<pre><span class="k">let</span> name = <span class="s">"Ada"</span>
+<span class="k">var</span> xp = <span class="n">0</span>
+xp += <span class="n">10</span>
+<span class="f">print</span>(<span class="s">"\(name): \(xp)"</span>)</pre></div>
+    <div class="lcard reveal" style="--c:var(--js)"><div class="badge">JS</div><h3>JavaScript</h3><p>The language of the web.</p>
+<pre><span class="k">const</span> nums = [<span class="n">1</span>,<span class="n">2</span>,<span class="n">3</span>];
+<span class="k">const</span> sq = nums.<span class="f">map</span>(n =&gt;
+  n * n);
+console.<span class="f">log</span>(sq);</pre></div>
+    <div class="lcard reveal" style="--c:var(--rust)"><div class="badge" style="color:#fff">Rs</div><h3>Rust</h3><p>Fast, safe, fearless.</p>
+<pre><span class="k">fn</span> <span class="f">main</span>() {
+  <span class="k">let mut</span> n = <span class="n">1</span>;
+  n *= <span class="n">2</span>;
+  <span class="f">println!</span>(<span class="s">"{}"</span>, n);
+}</pre></div>
+    <div class="lcard reveal" style="--c:var(--cpp)"><div class="badge" style="color:#fff;font-size:18px">C++</div><h3>C++</h3><p>Raw power, full control.</p>
+<pre><span class="k">int</span> x = <span class="n">9</span>;
+<span class="k">int</span>* p = &amp;x;
+*p += <span class="n">1</span>;
+std::cout &lt;&lt; x;</pre></div>
+  </div>
+</div></section>
+
+<section id="features"><div class="wrap">
+  <div class="center reveal"><div class="eyebrow">Why it sticks</div>
+  <h2>Built like a game. Taught like a mentor.</h2>
+  <p class="sub">Tutorials are easy to watch and easy to forget. CodeQuest makes you write, predict and fix code — every few seconds.</p></div>
+  <div class="fgrid">
+    <div class="feat reveal"><div class="ic" style="background:rgba(77,225,255,.15)">🧩</div><h3>Four ways to learn</h3><p>Predict the output, fill the blanks, arrange code lines into a working program, or write and run your own.</p></div>
+    <div class="feat reveal"><div class="ic" style="background:rgba(247,208,56,.15)">⚡</div><h3>Real code, really runs</h3><p>JavaScript challenges and the Playground execute on-device with a real engine. Instant output, zero setup.</p></div>
+    <div class="feat reveal"><div class="ic" style="background:rgba(255,138,61,.15)">🔥</div><h3>Streaks &amp; daily goals</h3><p>Hit your daily XP goal and keep the flame alive. Small, consistent steps beat weekend marathons.</p></div>
+    <div class="feat reveal"><div class="ic" style="background:rgba(139,92,246,.2)">🏆</div><h3>Quests &amp; badges</h3><p>Daily quests refresh every morning. Epic quests — Polyglot, Centurion, Course Master — reward the long game.</p></div>
+    <div class="feat reveal"><div class="ic" style="background:rgba(61,220,132,.15)">❤️</div><h3>Hearts, stars &amp; retries</h3><p>Miss a question and it comes back at the end. Finish clean for three stars. Mistakes are part of the loop.</p></div>
+    <div class="feat reveal"><div class="ic" style="background:rgba(255,92,108,.15)">📴</div><h3>Private &amp; offline</h3><p>No account, no sign-up. Your progress lives on your device, and every lesson works without a connection.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="show">
+    <div class="txt reveal"><div class="eyebrow">The path</div><h2>Always know what's next.</h2>
+      <p class="sub">A winding path of lessons, grouped into units. Complete one to unlock the next, and replay any lesson to beat your stars.</p>
+      <ul class="bul"><li>30 units per language, 5 lessons each</li><li>Concept card first, then 5 exercises</li><li>XP, gems and stars for every lesson</li></ul></div>
+    <div class="reveal"><div class="phone"><div class="screen"><img src="shots/lesson.png" alt="A CodeQuest lesson"></div></div></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="show rev">
+    <div class="txt reveal"><div class="eyebrow">Playground</div><h2>A JavaScript console in your pocket.</h2>
+      <p class="sub">Write code with a symbol bar built for phone thumbs, hit Run, see output instantly. No simulator, no laptop, no setup.</p>
+      <ul class="bul"><li>Syntax highlighting as you type</li><li>Ready-made examples: FizzBuzz, closures, primes…</li><li>Runs entirely on-device</li></ul></div>
+    <div class="reveal"><div class="phone"><div class="screen"><img src="shots/playground.png" alt="CodeQuest JavaScript playground"></div></div></div>
+  </div>
+</div></section>
+
+<section id="try"><div class="wrap">
+  <div class="center reveal"><div class="eyebrow">Try it right now</div><h2>This is what a lesson feels like.</h2>
+  <p class="sub">Answer the question below — the real app is exactly this, but with 3,000 of them.</p></div>
+  <div class="demo reveal" id="demo">
+    <div class="bar"><i id="dbar"></i></div>
+    <h4 id="dq"></h4>
+    <pre id="dcode"></pre>
+    <div id="dopts"></div>
+    <div class="fb" id="dfb"><strong id="dft"></strong><span id="dfw"></span></div>
+    <button class="btn primary" id="dbtn" disabled>Check</button>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="center reveal"><div class="eyebrow">How it works</div><h2>Three minutes a day adds up.</h2></div>
+  <div class="steps">
+    <div class="step reveal"><h3>Learn a concept</h3><p>A short, friendly card with an example. No walls of text.</p></div>
+    <div class="step reveal"><h3>Practice instantly</h3><p>Five exercises lock it in — predict, fill, order, or write the code yourself.</p></div>
+    <div class="step reveal"><h3>Level up</h3><p>Earn XP, stars and gems. Claim quest rewards, climb from Newbie to Legend.</p></div>
+  </div>
+</div></section>
+
+<section id="pricing"><div class="wrap">
+  <div class="center reveal"><div class="eyebrow">Pricing</div><h2>Start free. Pay once. Own it.</h2>
+  <p class="sub">The first 5 lessons of every language are free. Love it? One purchase unlocks everything — no subscription, no ads.</p></div>
+  <div class="steps" style="grid-template-columns:1fr 1fr;max-width:760px;margin:44px auto 0">
+    <div class="step reveal"><h3>Free</h3><p style="font-size:34px;font-weight:900;color:#fff;margin:6px 0">$0</p><p>5 lessons in each of Swift, JavaScript, Rust and C++, the JS Playground, quests and streaks.</p></div>
+    <div class="step reveal" style="border-color:rgba(139,92,246,.7);background:rgba(139,92,246,.14)"><h3>Full version</h3><p style="font-size:34px;font-weight:900;color:#fff;margin:6px 0">$19.99 <span style="font-size:15px;color:var(--t2);font-weight:700">one-time</span></p><p>All 600 lessons and 3,000 exercises, plus every future update.</p></div>
+  </div>
+</div></section>
+
+<section id="faq"><div class="wrap">
+  <div class="center reveal"><div class="eyebrow">Questions</div><h2>Good to know.</h2></div>
+  <div class="faq reveal">
+    <details><summary>Do I need any coding experience?</summary><p>No. Every course starts at “what is a variable?” and ramps up gradually. If you already code, the later units go deep — closures, ownership, templates, concurrency and more.</p></details>
+    <details><summary>Does the code actually run?</summary><p>JavaScript lessons and the Playground run real JavaScript on your phone. Swift, Rust and C++ lessons teach through predicting output, completing code and arranging it — the same skills you use reading real code.</p></details>
+    <details><summary>How much does it cost?</summary><p>The app is free to download, and the first 5 lessons of every language are free. A single one-time purchase of $19.99 unlocks all 600 lessons and every future update. There is no subscription.</p></details>
+    <details><summary>Do I need an account or internet?</summary><p>No account, and lessons work offline. Your progress is saved on your device.</p></details>
+    <details><summary>How long is each lesson?</summary><p>About 3–5 minutes: one concept card and five short exercises. Perfect for a commute or a coffee break.</p></details>
+    <details><summary>Which iPhones are supported?</summary><p>CodeQuest is built for iPhone running iOS 17 or later.</p></details>
+  </div>
+</div></section>
+
+<section id="download"><div class="wrap">
+  <div class="final reveal">
+    <div class="mascot"><div class="h"></div><div class="f"><div class="e"><i></i><i></i></div><div class="m"></div></div></div>
+    <h2>Your first quest is waiting.</h2>
+    <p class="sub" style="margin:0 auto 28px">Pick a language and ship your first “Hello, world” today.</p>
+    <!-- TODO: replace # with the real App Store URL once the app is live -->
+    <a class="btn primary" href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.8-3.5.8-.7 0-1.9-.8-3.1-.8-1.6 0-3.1.9-3.9 2.4-1.7 2.9-.4 7.2 1.2 9.6.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8s1.9.8 3.1.8c1.3 0 2.1-1.2 2.9-2.3.9-1.3 1.3-2.6 1.3-2.7 0 0-2.7-1-2.7-4.1zM14 5.5c.6-.8 1.1-1.8.9-2.9-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.8-1 2.8 1 .1 2.1-.5 2.8-1.3z"/></svg>Download on the App Store</a>
+  </div>
+</div></section>
+
+<footer><div class="wrap"><span>© 2026 CodeQuest</span><span><a href="privacy.html">Privacy</a> · <a href="support.html">Support</a></span></div></footer>
+
+<script>
+// scroll reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// live mini-lesson
+const Q=[
+ {q:'What does this log?',code:'const a = "5";\nconsole.log(a + 3);',o:['8','53','"5"3','Error'],a:1,w:'+ with a string concatenates, so 3 becomes "3" and the result is "53".'},
+ {q:'Which keyword makes a variable you can never reassign?',code:'',o:['var','let','const','static'],a:2,w:'const binds a name once. Reassigning it throws a TypeError.'},
+ {q:'What is the value of n?',code:'let n = 0;\nfor (let i = 1; i <= 4; i++) n += i;\nconsole.log(n);',o:['4','10','6','24'],a:1,w:'1 + 2 + 3 + 4 = 10. The loop adds i each time.'}
+];
+let qi=0,sel=-1,done=false,right=0;
+const $=id=>document.getElementById(id);
+function render(){
+  const q=Q[qi];sel=-1;done=false;
+  $('dq').textContent=q.q;
+  $('dcode').style.display=q.code?'block':'none';$('dcode').textContent=q.code;
+  $('dopts').innerHTML=q.o.map((t,i)=>`<button class="opt" data-i="${i}"><b>${'ABCD'[i]}</b><span>${t.replace(/</g,'&lt;')}</span></button>`).join('');
+  $('dfb').className='fb';$('dbtn').textContent='Check';$('dbtn').disabled=true;
+  $('dbar').style.width=(qi/Q.length*100)+'%';
+  document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(done)return;sel=+b.dataset.i;document.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');$('dbtn').disabled=false});
+}
+$('dbtn').onclick=()=>{
+  const q=Q[qi];
+  if(!done){
+    done=true;const ok=sel===q.a;if(ok)right++;
+    document.querySelectorAll('.opt').forEach((b,i)=>{b.classList.remove('sel');if(i===q.a)b.classList.add('ok');else if(i===sel)b.classList.add('no')});
+    $('dfb').className='fb show '+(ok?'ok':'no');$('dft').textContent=ok?'Nailed it!':'Not quite';$('dfw').textContent=q.w;
+    $('dbtn').textContent=qi===Q.length-1?'Finish':'Continue';
+  }else if(qi<Q.length-1){qi++;render()}
+  else{
+    $('dbar').style.width='100%';
+    $('dq').textContent=`Lesson complete — ${right}/${Q.length} first try 🎉`;
+    $('dcode').style.display='none';$('dfb').className='fb';
+    $('dopts').innerHTML='<p style="color:rgba(255,255,255,.75);font-weight:600;margin-bottom:6px">That was 3 of the 3,000 exercises waiting in the app.</p>';
+    $('dbtn').textContent='Get CodeQuest';$('dbtn').onclick=()=>location.hash='#download';
+  }
+};
+render();
+</script>
+</body>
+</html>
